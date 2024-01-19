@@ -68,7 +68,7 @@ public class LibraryManager
         {
             if (findedBook.AvailableCount() > 0)
             {
-                findedBook.DueDates.Add(DateTime.Now.AddDays(7));
+                findedBook.DueDates.Add(DateTime.Now.AddDays(new Random().Next(-10, 10)));
                 Console.WriteLine("Ödünç işlemi başarılı.");
             }
             else
