@@ -29,7 +29,7 @@ public class LibraryManager
         Console.Clear();
         Book newBook = new Book();
 
-        string validationRegex = "^[a-zA-Z]{2,20}$";
+        string validationRegex = "^[\\s\\S]{2,20}$";
         Console.WriteLine("(En az 2 en fazla 20 karakter olmalıdır. Sadece harf içermelidir.)");
         while (true)
         {
@@ -46,7 +46,6 @@ public class LibraryManager
         }
 
         Console.WriteLine("(En az 2 en fazla 20 karakter olmalıdır. Sadece harf içermelidir.)");
-        Console.Write("Yazar adı giriniz: ");
         while (true)
         {
             Console.Write("Yazar adı giriniz: ");
