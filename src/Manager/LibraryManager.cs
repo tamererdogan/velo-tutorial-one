@@ -22,6 +22,7 @@ public class LibraryManager
     public bool ListBookAction()
     {
         Console.Clear();
+        Helper.DrawTable(books);
         WaitBeforeGoBack();
         return true;
     }
