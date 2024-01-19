@@ -84,6 +84,30 @@ public class LibraryManager
     public bool ReturnBookAction()
     {
         Console.Clear();
+
+        Helper.DrawTable(books);
+        Console.WriteLine("\nİade edilecek kitabın ISBN numarasını giriniz:");
+        string isbn = Console.ReadLine() ?? "";
+        Book? findedBook = books.Find(book => book.Isbn == isbn);
+
+        Console.WriteLine("");
+        if (findedBook == null)
+        {
+            Console.WriteLine("ISBN bulunamadı.");
+        }
+        else
+        {
+            if (findedBook.DueDates.Count > 0)
+            {
+                findedBook.DueDates.Remove(findedBook.DueDates.Min());
+                Console.WriteLine("İade işlemi başarılı.");
+            }
+            else
+            {
+                Console.WriteLine("Bu kitap için ödünç verilmiş kopya bulunmamakta.");
+            }
+        }
+
         WaitBeforeGoBack();
         return true;
     }
