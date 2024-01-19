@@ -1,14 +1,25 @@
+using System.Text.Json;
+
 public class LibraryManager
 {
     List<Book> books = new List<Book>();
 
-    public bool Load()
+    public void Load(string path)
     {
-        return true;
+        Console.WriteLine("\nVeriler yükleniyor.");
+        string fileContent = File.ReadAllText(path);
+        books = JsonSerializer.Deserialize<List<Book>>(fileContent) ?? [];
+        Console.WriteLine("\nVeriler yüklendi. Menü açılıyor...");
+        Thread.Sleep(1500);
     }
 
-    public bool Save()
+    public bool Save(string path)
     {
+        Console.Clear();
+        Console.WriteLine("\naVeriler kaydediliyor.");
+        string content = JsonSerializer.Serialize(books);
+        File.WriteAllText(path, content);
+        Console.WriteLine("Veriler kaydedildi.");
         return false;
     }
 

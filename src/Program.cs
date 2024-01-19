@@ -1,4 +1,20 @@
-﻿LibraryManager libraryManager = new LibraryManager();
+﻿const string databasePath = "./src/database.json";
+LibraryManager libraryManager = new LibraryManager();
+
+try
+{
+    libraryManager.Load(databasePath);
+}
+catch (FileNotFoundException)
+{
+    Console.WriteLine("Belirtilen dosya bulunamadı, çıkış yapılıyor.");
+    return;
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Bir hata oluştu çıkış yapılıyor.: {ex.Message}");
+    return;
+}
 
 List<ConsoleKey> validActionList = new List<ConsoleKey>()
 {
@@ -57,7 +73,7 @@ bool Action()
         case ConsoleKey.D6:
             return libraryManager.ExpiredBooksAction();
         case ConsoleKey.Escape:
-            return libraryManager.Save();
+            return libraryManager.Save(databasePath);
         default:
             return false;
     }
