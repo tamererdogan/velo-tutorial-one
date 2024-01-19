@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 public class LibraryManager
 {
@@ -26,6 +27,75 @@ public class LibraryManager
     public bool AddBookAction()
     {
         Console.Clear();
+        Book newBook = new Book();
+
+        string validationRegex = "^[a-zA-Z]{2,20}$";
+        Console.WriteLine("(En az 2 en fazla 20 karakter olmalıdır. Sadece harf içermelidir.)");
+        while (true)
+        {
+            Console.Write("Kitap adı giriniz: ");
+            string title = Console.ReadLine() ?? "";
+            if (!Regex.IsMatch(title, validationRegex))
+            {
+                Console.WriteLine("Girilen değer uygun değil tekrar deneyiniz.");
+                continue;
+            }
+
+            newBook.Title = title;
+            break;
+        }
+
+        Console.WriteLine("(En az 2 en fazla 20 karakter olmalıdır. Sadece harf içermelidir.)");
+        Console.Write("Yazar adı giriniz: ");
+        while (true)
+        {
+            Console.Write("Yazar adı giriniz: ");
+            string author = Console.ReadLine() ?? "";
+            if (!Regex.IsMatch(author, validationRegex))
+            {
+                Console.WriteLine("Girilen değer uygun değil tekrar deneyiniz.");
+                continue;
+            }
+
+            newBook.Author = author;
+            break;
+        }
+
+        string isbnValidationRegex = "^\\d{5}$";
+        Console.WriteLine("(5 karakter olmalıdır. Sadece sayı içermelidir.)");
+        while (true)
+        {
+            Console.Write("ISBN numarası giriniz: ");
+            string isbn = Console.ReadLine() ?? "";
+            if (!Regex.IsMatch(isbn, isbnValidationRegex))
+            {
+                Console.WriteLine("Girilen değer uygun değil tekrar deneyiniz.");
+                continue;
+            }
+
+            newBook.Isbn = isbn;
+            break;
+        }
+
+        string countValidationRegexx = "^([1-9]|[1-8][0-9]|99)$";
+        Console.WriteLine("(1-99 arasında bir sayı girilmelidir.)");
+        while (true)
+        {
+            Console.Write("Kopya sayısı giriniz: ");
+            string copyCount = Console.ReadLine() ?? "";
+            if (!Regex.IsMatch(copyCount, countValidationRegexx))
+            {
+                Console.WriteLine("Girilen değer uygun değil tekrar deneyiniz.");
+                continue;
+            }
+
+            newBook.CopyCount = Convert.ToInt32(copyCount);
+            break;
+        }
+
+        books.Add(newBook);
+
+        Console.WriteLine("\nBaşarı ile eklendi!");
         WaitBeforeGoBack();
         return true;
     }
