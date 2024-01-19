@@ -17,7 +17,7 @@ public class LibraryManager
     public bool Save(string path)
     {
         Console.Clear();
-        Console.WriteLine("\naVeriler kaydediliyor.");
+        Console.WriteLine("\nVeriler kaydediliyor.");
         string content = JsonSerializer.Serialize(books);
         File.WriteAllText(path, content);
         Console.WriteLine("Veriler kaydedildi.");
