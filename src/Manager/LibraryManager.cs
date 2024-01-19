@@ -115,6 +115,29 @@ public class LibraryManager
     public bool ExpiredBooksAction()
     {
         Console.Clear();
+        string rowFormat = "| {0, -20} | {1, -20} | {2, -20} | {3, -20} |";
+        string divider = "+" + new string('-', 91) + "+";
+        Console.WriteLine(divider);
+        Console.WriteLine(string.Format(rowFormat, "Title", "Author", "ISBN", "Due Date"));
+        Console.WriteLine(divider);
+        foreach (Book book in books)
+        {
+            foreach (DateTime dueDate in book.DueDates)
+            {
+                if (dueDate.CompareTo(DateTime.Now) > 0)
+                    continue;
+                Console.WriteLine(
+                    string.Format(
+                        rowFormat,
+                        book.Title.Length > 20 ? book.Title.Substring(0, 20) : book.Title,
+                        book.Author.Length > 20 ? book.Author.Substring(0, 20) : book.Author,
+                        book.Isbn.Length > 20 ? book.Isbn.Substring(0, 20) : book.Isbn,
+                        dueDate.ToShortDateString()
+                    )
+                );
+                Console.WriteLine(divider);
+            }
+        }
         WaitBeforeGoBack();
         return true;
     }
